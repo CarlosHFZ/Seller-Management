@@ -1,6 +1,3 @@
-# Seller Management
- 
-
 <!--
 
 1.Crie uma classe para gerenciar vendedores (todas as funções de um CRUD - Create, Read, Update e Delete).
