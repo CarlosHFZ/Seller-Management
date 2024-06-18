@@ -1,4 +1,4 @@
-<!--
+# Seller Management
 
 1.Crie uma classe para gerenciar vendedores (todas as funções de um CRUD - Create, Read, Update e Delete).
 a.Considere pelo menos os seguintes atributos: Nome, CPF, data de nascimento, e-mail e estado (UF).
@@ -20,4 +20,4 @@ a.Considere o CPF como chave para a atualização.
 6.[BÔNUS] Utilize um banco de dados para armazenar os dados (ex: postgresql ou sqlite).
 7.[BÔNUS] Escreva testes para as classes e funções criadas. 
 
--->
+
