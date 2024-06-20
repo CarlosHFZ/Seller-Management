@@ -1,23 +1,32 @@
 # Seller Management
 
-1.Crie uma classe para gerenciar vendedores (todas as funções de um CRUD - Create, Read, Update e Delete).
-a.Considere pelo menos os seguintes atributos: Nome, CPF, data de nascimento, e-mail e estado (UF).
+Este programa foi desenvolvido para gerenciar dados de vendedores e vendas. Eis o que ele oferece:
 
-2.Uma função para realizar a leitura de uma planilha com dados dos vendedores para adicionar ou atualizar em lote.
-a.Considere o CPF como chave para a atualização.
+Banco de Dados:
+    Criação de um banco de dados.
+    Criação de tabelas no banco de dados.
 
-3.Uma função para realizar a leitura de uma planilha de vendas (ex: https://docs.google.com/spreadsheets/d/1F8KUo66P5pQ1MKTPxU39li5S75rhATSy4C5EMNcJNOc/edit?usp=sharing) e calcular as comissões que devem ser pagas para cada vendedor. Considere as seguintes regras para as comissões:
+Integração com Planilhas Excel:
+    Importa informações de vendas e cadastros de vendedores em planilhas Excel para o banco de dados.
 
-    a.Cada vendedor recebe 10% do valor de cada venda como comissão.
+Cadastro de Vendedores:
+    Criação, atualização e exclusão de registros de vendedores.
 
-    b.Se a venda foi realizada por um canal online, 20% da comissão destinada ao vendedor é direcionada para a equipe de marketing.
+Visualização de Dados:
+    Exibe tabelas diretamente no terminal.
+    Apresenta um resumo geral de vendas por setor, região e canal.
 
-    c.Se o valor total das comissões do vendedor for maior ou igual a R$ 1.000,00, 10% da comissão é destinada ao gerente de vendas.
+Limpeza de Dados:
+    Limpa tabelas específicas ou todas as tabelas do banco de dados.
 
-4.Apresentar o volume de vendas (R$) e média por profissional para cada canal e por cada estado.
+Cálculo de Comissões:
+    Calcula comissões para vendedores, marketing e gerentes de vendas.
 
-5.[BÔNUS] Crie um servidor para disponibilizar as funções via API.
-6.[BÔNUS] Utilize um banco de dados para armazenar os dados (ex: postgresql ou sqlite).
-7.[BÔNUS] Escreva testes para as classes e funções criadas. 
+Testes Automatizados:
+    Inclui testes para garantir a integridade dos dados.
+
+A exibição ocorre no terminal Python e utilizando DB Browser (SQLite) para acompanhar as movimentações de dados. Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a biblioteca Pandas.
+
+
 
 
