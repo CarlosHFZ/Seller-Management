@@ -158,7 +158,8 @@ class SellerManagement():
 ##----------- Funções para atualizar o banco de dados SQlite --------------##
 
 
-## Adciona ou atualiza os dados de um Vendedor pela chamada da Classe no main ##
+## Adciona ou atualiza os dados de um Vendedor quando inserido nos atributos da classe no main ##
+## Alem disso essa função verifica se já existe um cpf cadastrado, se sim aplica um UPDATE para atualizar as informalçioes, se não aplica um INSERT para adicionar##
     def update_Seller(self):
         connection = sqlite3.connect("DataBase.db")
         cursor = connection.cursor()
@@ -305,7 +306,8 @@ class SellerManagement():
         cursor.close()
         connection.close()
 
-## Fiz essa função somente verificar se o banco de dados foi criado ##
+## Fiz essa função somente para verificar se as tabelas do banco de dados foram criadas ##
+## retorna None caso as tabelas foram criadas corretamente ou uma mensagem de erro caso não ##
     def data_Base_its_open(self):
                 import os
                 os.system("cls")
@@ -328,4 +330,22 @@ class SellerManagement():
                     connection.close()
                     os.system("cls")
                     return f"Mensagem: Erro desconhecido! --->",Exception
+
+## Fiz essa função apenas para buscar uma informação especifca no banco de dados ##                
+    def search(self, data, table, where):
+        connection = sqlite3.connect("DataBase.db")
+        cursor = connection.cursor()
+
+        cursor.execute(f" SELECT COUNT(*) FROM {table} WHERE {where} = ? ", (data,))
+        resultado = cursor.fetchone()
+
+        connection.close()
+
+        return resultado[0] > 0
+    
+
+
+
+
+
                             
