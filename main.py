@@ -257,7 +257,7 @@ while True:
                                 # Pode digitar tanto no formato "..-" ou sem #
                                 cpf_valid = validate_cpf(cpf)
 
-                                exist = manage.search(cpf_valid, "Sellers", "CPF")
+                                exist = manage.search(f"{cpf_valid}", "Sellers", "CPF")
 
                                 if exist is False:
                                     os.system("cls")
