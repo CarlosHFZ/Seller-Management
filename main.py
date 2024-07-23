@@ -10,8 +10,10 @@ from datetime import datetime, timedelta
 
 
 def generate_name() -> str:
-    first_names = ['John', 'Jane', 'Michael', 'Sarah', 'William', 'Jessica', 'David', 'Emily', 'Robert', 'Linda']
-    last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez']
+    first_names = ['John', 'Jane', 'Michael', 'Sarah', 'William', 'Jessica',
+                   'David', 'Emily', 'Robert', 'Linda']
+    last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia',
+                  'Miller', 'Davis', 'Rodriguez', 'Martinez']
     first_name = random.choice(first_names)
     last_name = random.choice(last_names)
     return f"{first_name} {last_name}"
@@ -50,16 +52,16 @@ def generate_username(length: int = 8) -> str:
 
 
 def generate_email() -> str:
-    common_domains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com']
+    common_domains = ['gmail.com', 'yahoo.com', 'hotmail.com',
+                      'outlook.com', 'icloud.com']
     username = generate_username()
     domain = random.choice(common_domains)
     return f"{username}@{domain}"
 
 
 def generate_CPF(num: int = 1):
-
+    import random
     for i in range(0, num):
-        import random
 
         def verificador_final(entrada):
             return 0 if ((entrada * 10) % 11) > 9 else ((entrada * 10) % 11)
@@ -98,25 +100,21 @@ def generate_CPF(num: int = 1):
                 cpf_str.append(str(verificador_final(soma_segundo_digito)))
             t += 1
         cpf_gerado = ''
+
         for i in cpf_str:
-            cpf_gerado += i
-        print(cpf_gerado)
+            cpf_gerado += str(i)
+
         return cpf_gerado
 
-print(generate_CPF(1))
+# função usada para validar o cpf que o usuario digitar
+#  e formatar para enviar no banco de dados
 
-## função usada para validar o cpf que o usuario digitar
-##  e formatar para enviar no banco de dados
-def validate_cpf(cpf: str) -> str:
 
+def validate_cpf(cpf: str) -> str | None:
     cpf = ''.join(filter(str.isdigit, cpf))
-
- 
     if len(cpf) != 11:
         return None
-
     cpf_formatado = f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
-
     return cpf_formatado
 
 
@@ -142,9 +140,9 @@ while True:
             "Digite: "
             )
 
-    
     match opt:
-        ## Essa opção cria as tabelas dentro do banco de dados ##
+
+        # Essa opção cria as tabelas dentro do banco de dados ##
         case "1":
             manage.create_Sellers_Table()
             manage.create_Sales_Table()
@@ -152,8 +150,10 @@ while True:
             os.system("cls")
             print("Mensagem: Base de dados criando com sucesso!")
 
-        ## Essa opção atualiza os dados de cadastro dos vendedores no banco de dados utilizando a planilha = Vendedores.xlsx##
-        ## Observação: A planilha Vendedores.xlsx deve estar na mesma pasta deste script e conter o mesmo nome para funcionar) ##
+        # Essa opção atualiza os dados de cadastro dos vendedores no
+        # banco de dados utilizando a planilha = Vendedores.xlsx##
+        # Observação: A planilha Vendedores.xlsx deve estar na mesma
+        # pasta deste script e conter o mesmo nome para funcionar)
         case "2":
             message = manage.data_Base_its_open()
             try:
@@ -169,9 +169,9 @@ while True:
             except Exception:
                 print("Mensagem: Erro desconhecido ", Exception)
 
-        ## Essa opção altera informações diretamente no banco de dados ##
+        # Essa opção altera informações diretamente no banco de dados ##
         case "3":
-            message = manage.data_Base_its_open() 
+            message = manage.data_Base_its_open()
             if message is None:
                 while True:
                     print(
@@ -182,36 +182,43 @@ while True:
                         )
                     user = input("Digite: ")
                     match user:
-                        ## Essa opção gera um cadastro aleatorio para um vendedor, apenas limitando pelo nome de vendedores que podem repetir pois criei uma lista ##
-                        ## Pequena, todas essas funções podem ser vistas acima no topo do codigo ##
+
+                        # Essa opção gera um cadastro aleatorio para um vendedor
+                        # ,apenas limitando pelo nome de vendedores que podem
+                        # repetir pois criei uma lista Pequena, todas essas
+                        # funções podem ser vistas acima no topo do codigo ##
                         case "1":
                             name = generate_name()
                             cpf = generate_CPF()
-                            date_of_birth = generate_data()     
+                            date_of_birth = generate_data()
                             email = generate_email()
                             state = generate_UF()
-                            manage = SellerManagement(name=name, cpf=cpf, date_of_birth=date_of_birth, email=email, state=state)
+                            manage = SellerManagement(
+                                name=name, cpf=cpf,
+                                date_of_birth=date_of_birth,
+                                email=email, state=state)
                             manage.update_Seller()
                             os.system("cls")
                             print("Mensagem: Cadastro registrado com sucesso")
-                        
-                        
-                        ## Essa opção, voce insere manualmente os dados de um vendedor ##
+
+                        # Essa opção, voce insere manualmente os dados de um vendedor #
                         case "2":
                             while True:
 
                                 cpf = input("\nDigite o CPF ou 0 para encerrar: ")
 
-                                ##  Essa função que vai tratar o cpf digitado para enviar da forma correta para o banco de dados  ##
-                                ## Pode digitar tanto no formato "..-" ou sem ##
+                                # Essa função que vai tratar o cpf digitado
+                                # para enviar da forma correta para o banco de dados
+                                # Pode digitar tanto no formato "..-" ou sem ##
                                 cpf_valid = validate_cpf(cpf)
 
-                                ##  Essa função verifica se o cpf digitado existe no banco de dados ##
-                                exist = manage.search(cpf_valid,"Sellers","CPF")
-                                
+                                # Essa função verifica se o cpf digitado existe
+                                # no banco de dados
+                                exist = manage.search(cpf_valid, "Sellers", "CPF")
+
                                 if cpf == "0":
                                     break
-                                
+
                                 elif exist is True:
                                     os.system("cls")
                                     print("Mensagem: CPF já cadastrado")
@@ -219,21 +226,27 @@ while True:
                                 elif cpf_valid is None:
                                     os.system("cls")
                                     print("Mensagem: CPF invalido")
-                                
 
                                 else:
                                     name = input("Nome: ")
-                                    date_of_birth = input("Data de nascimento no formato YYYY/MM/DD: ")    
+                                    date_of_birth = input(
+                                        "Data de nascimento no formato YYYY/MM/DD: "
+                                    )
                                     email = input("Email: ")
                                     state = input("Estado(UF): ")
-                                    manage = SellerManagement(name=name, cpf=cpf_valid, date_of_birth=date_of_birth, email=email, state=state)
+                                    manage = SellerManagement(
+                                        name=name, cpf=cpf_valid,
+                                        date_of_birth=date_of_birth,
+                                        email=email, state=state)
                                     manage.update_Seller()
                                     os.system("cls")
                                     print("Mensagem: Cadastro registrado com sucesso")
                                     break
 
-                        ## Essa opção atualiza o cadastro de um vendedor no banco de dados utilizando cpf como parametro, apos uma validação de informaçoes ##
-                        ## Voce insere manualmente cada informação do vendedor  ##                
+                        # Essa opção atualiza o cadastro de um vendedor no
+                        # banco de dados utilizando cpf como parametro, apos uma
+                        # validação de informaçoes, você insere manualmente cada
+                        #  informação do vendedor
                         case "3":
                             while True:
                                 cpf = input("\nDigite o CPF ou 0 para encerrar: ")
@@ -242,10 +255,10 @@ while True:
                                     os.system("cls")
                                     break
 
-                                ## Pode digitar tanto no formato "..-" ou sem ##
+                                # Pode digitar tanto no formato "..-" ou sem #
                                 cpf_valid = validate_cpf(cpf)
 
-                                exist = manage.search(cpf_valid,"Sellers","CPF")
+                                exist = manage.search(cpf_valid, "Sellers", "CPF")
 
                                 if exist is False:
                                     os.system("cls")
@@ -254,101 +267,112 @@ while True:
 
                                 else:
                                     name = input("Nome: ")
-                                    date_of_birth = input("Data de nascimento no formato YYYY/MM/DD: ")    
+                                    date_of_birth = input("Data de nascimento no formato YYYY/MM/DD: ")
                                     email = input("Email: ")
                                     state = input("Estado(UF): ")
-                                    manage = SellerManagement(name=name, cpf=cpf_valid, date_of_birth=date_of_birth, email=email, state=state)
+                                    manage = SellerManagement(
+                                        name=name,
+                                        cpf=cpf_valid,
+                                        date_of_birth=date_of_birth,
+                                        email=email, state=state)
                                     manage.update_Seller()
                                     os.system("cls")
                                     print("Mensagem: Cadastro atualizado com sucesso")
                                     break
 
-                        ## Essa opção apenas sai do laço atual para o laço anterior ##            
+                        # Essa opção apenas sai do laço atual para o laço anterior
                         case "4":
                             os.system("cls")
                             break
 
-                        ## Caso digite qualquer outra coisa, repetira esse laço  ##
+                        # Caso digite qualquer outra coisa, repetira esse laço
                         case _:
                             os.system("cls")
                             print("Mensagem: Opção incorreta!\n")
 
-            ## Esse trexo do codigo é o que da a mensagem de erro caso as tabelas do banco de daos não forem criados ##
+            # Esse trexo do codigo é o que da a mensagem de erro caso
+            # as tabelas do banco de dados não forem criados
             else:
                 os.system("cls")
                 print(message)
 
-        ## Essa opção e onde voce insere a planilha = Vendas.xlsx no banco de dados ##
+        # Essa opção e onde voce insere a planilha = Vendas.xlsx no banco de dados
         case "4":
-            message = manage.data_Base_its_open()  
-            if message is None: 
+            message = manage.data_Base_its_open()
+            if message is None:
                 print(
                     "1 - Inserir na base de dados\n"
                     "2 - Atualizar a base de dados\n"
                     "3 - Sair\n"
                     )
-                
                 user = input("Digite: ")
 
-                ## Essa opção apenas insere as informaçãos, caso já tenha informações no banco de dados ira incrementa-lo ##
+                # Essa opção apenas insere as informaçãos, caso já tenha
+                # informações no banco de dados ira incrementa-lo
                 if user == "1":
                     manage.insert_Sales_Table()
                     os.system("cls")
                     print("Mensagem: Dados inseridos no banco de dados com sucesso.")
 
-                ## Essa opção atualiza completamente a tabela de vendas, ou seja, apaga a tabela primeiro e depois insere  ##
+                # Essa opção atualiza completamente a tabela de vendas, ou seja,
+                # apaga a tabela primeiro e depois insere  ##
                 elif user == "2":
                     manage.clean_Table("Sales")
                     manage.insert_Sales_Table()
                     os.system("cls")
                     print("Mensagem: Banco de dados atualizado com sucesso.")
-                
-                ## Sai do laço atual e volta para o menu ##
+
+                # Sai do laço atual e volta para o menu
                 elif user == "3":
                     os.system("cls")
                     continue
-                ## Caso digite qulquer outra coisa ira chegar aqui ##
+
+                # Caso digite qulquer outra coisa ira chegar aqui
                 else:
                     os.system("cls")
                     print("Opção incorreta")
-            ## Caso não seja criado as tabelas no banco de dados, ira mostrar uma memsagem de erro aqui##
+
+            # Caso não seja criado as tabelas no banco de dados,
+            # ira mostrar uma memsagem de erro aqui
             else:
                 os.system("cls")
                 print(message)
 
-        ## Mostra no terminal a tabela de vendedores do banco de dados ##
+        # Mostra no terminal a tabela de vendedores do banco de dados
         case "5":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 os.system("cls")
                 manage.read_Table("Sellers")
             else:
                 print(message)
 
-        ## Mostra no terminal a tabela de vendas do banco de dados ##
+        # Mostra no terminal a tabela de vendas do banco de dados
         case "6":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 os.system("cls")
                 manage.read_Table("Sales")
             else:
                 print(message)
 
-        ## Mostra no terminal a tabela de comissões do banco de dados ##
+        # Mostra no terminal a tabela de comissões do banco de dados
         case "7":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 os.system("cls")
                 manage.read_Table("Commission")
             else:
                 print(message)
 
-        ## Essa opção voce consegue deletar um cadastro de um vendedor inserindo o cpf ##
+        # Essa opção voce consegue deletar um cadastro de um vendedor
+        # inserindo o cpf
         case "8":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 while True:
-                    ## Pode digitar tanto no formato "..-" ou sem ##
+
+                    # Pode digitar tanto no formato "..-" ou sem
                     cpf = input("Digite o CPF ou 0 para sair: ")
 
                     if cpf == "0":
@@ -359,11 +383,12 @@ while True:
                     if cpf_valid is None:
                         os.system("cls")
                         print("Mensagem: CPF invalido")
-                        
-                    else:
 
-                        exist = manage.search(cpf_valid,"Sellers","CPF")
-                        ## Caso o manage.search encontre o CPF retornará True e em seguida o vendedor será deletado pelo delete_seller ##
+                    else:
+                        exist = manage.search(cpf_valid, "Sellers", "CPF")
+
+                        # Caso o manage.search encontre o CPF retornará True e
+                        # em seguida o vendedor será deletado pelo delete_seller
                         if exist is True:
                             os.system("cls")
                             manage.delete_Seller(cpf_valid)
@@ -374,13 +399,12 @@ while True:
                             os.system("cls")
                             print("Mensagem: Vendedor não localizado no banco de dados")
                             break
-
             else:
                 print(message)
 
-        ## Essa opção limpa uma tabela a escolha ##
+        # Essa opção limpa uma tabela a escolha
         case "9":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 print(
                     "1 - Limpar tabela dos vendedores\n"
@@ -389,19 +413,23 @@ while True:
                     "4 - Sair\n"
                     )
                 user = input("Digite: ")
+
                 match user:
                     case "1":
                         manage.clean_Table("Sellers")
                         os.system("cls")
-                        print("Mensagem: Todos os dados da tabela vendedores foram apagados com sucesso!")
+                        print("Mensagem: Todos os dados da tabela vendedores"
+                              "foram apagados com sucesso!")
                     case "2":
                         manage.clean_Table("Sales")
                         os.system("cls")
-                        print("Mensagem: Todos os dados da tabela foram vendas apagados com sucesso!")
+                        print("Mensagem: Todos os dados da tabela foram vendas"
+                              "apagados com sucesso!")
                     case "3":
                         manage.clean_Table("Commission")
                         os.system("cls")
-                        print("Mensagem: Todos os dados da tabela commissôes foram apagados com sucesso!")
+                        print("Mensagem: Todos os dados da tabela commissôes"
+                              "foram apagados com sucesso!")
                     case "4":
                         os.system("cls")
                         continue
@@ -410,9 +438,11 @@ while True:
                         print("Mensagem: Opção invalida")
             else:
                 print(message)
-        ## Essa opção ira calcular a comissão dos vendedores utilizando toda as vendas na tabela vendas do banco de dados ## 
+
+        # Essa opção ira calcular a comissão dos vendedores utilizando toda as
+        # vendas na tabela vendas do banco de dados
         case "10":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 manage.clean_Table("Commission")
                 manage.calculate_Commision()
@@ -420,9 +450,10 @@ while True:
                 print("Mensagem: Comissão gerado com sucesso!")
             else:
                 print(message)
-        ## Essa opção mostra o quadro geral de vendas## 
+
+        # Essa opção mostra o quadro geral de vendas
         case "11":
-            message = manage.data_Base_its_open()  
+            message = manage.data_Base_its_open()
             if message is None:
                 os.system("cls")
                 manage.show_General_Sales()
@@ -437,8 +468,9 @@ while True:
                 "3 - Sair\n"
                 )
             user = input("Digite: ")
+
             match user:
-                case "1":                   
+                case "1":
                     os.system("cls")
                     help()
                 case "2":
@@ -457,5 +489,4 @@ while True:
             break
         case _:
             os.system("cls")
-            print("Mensagem: Opção invalida")    
-        
+            print("Mensagem: Opção invalida")

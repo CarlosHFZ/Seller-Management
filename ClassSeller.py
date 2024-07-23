@@ -11,22 +11,19 @@ class SellerManagement():
         self.email = email
         self.state = state
 
+# -------------- Funções para criação do banco de dados SQLite -------------- #
 
-
-##-------------- Funções para criação do banco de dados SQLite --------------##
-
-
-## Cria a tabela de Vendedores ##
+# Cria a tabela de Vendedores
     def create_Sellers_Table(self):
         connection = sqlite3.connect("DataBase.db")
         cursor = connection.cursor()
         cursor.execute('CREATE TABLE IF NOT EXISTS Sellers('
                        'id INTEGER PRIMARY KEY AUTOINCREMENT,'
                        'Name TEXT,'
-                       'CPF TEXT UNIQUE,'                       
-                       'Date_of_birth TEXT,'                       
-                       'Email TEXT,'                       
-                       'State TEXT'                       
+                       'CPF TEXT UNIQUE,'
+                       'Date_of_birth TEXT,'
+                       'Email TEXT,'
+                       'State TEXT'
                        ')')
         
         cursor.close()
