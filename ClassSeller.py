@@ -25,35 +25,34 @@ class SellerManagement():
                        'Email TEXT,'
                        'State TEXT'
                        ')')
-        
         cursor.close()
         connection.close()
 
-## Cria a tabela de Vendas ##
+# Cria a tabela de Vendas
     def create_Sales_Table(self):
         connection = sqlite3.connect("DataBase.db")
         cursor = connection.cursor()
         cursor.execute('CREATE TABLE IF NOT EXISTS Sales('
-                       'id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,' 
-                       'Date_of_Sale TEXT,'                      
-                       'Sallers_name TEXT,'                       
-                       'Sale FLOAT,'                       
-                       'Client_type TEXT,'                       
-                       'Sales_channel TEXT,'                       
-                       'Cost_of_sale FLOAT'                       
+                       'id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,'
+                       'Date_of_Sale TEXT,'
+                       'Sallers_name TEXT,'
+                       'Sale FLOAT,'
+                       'Client_type TEXT,'
+                       'Sales_channel TEXT,'
+                       'Cost_of_sale FLOAT'
                        ')')
         
         cursor.close()
         connection.close()
 
-## Cria a tabela de Comissôes
+# Cria a tabela de Comissôes
     def create_Commission_Table(self):
         connection = sqlite3.connect("DataBase.db")
         cursor = connection.cursor()
-        cursor.execute('CREATE TABLE IF NOT EXISTS Commission(' 
-                       'Date_of_Payment TEXT,'                      
-                       'Sallers_name TEXT UNIQUE,'                       
-                       'Commission FLOAT'                                           
+        cursor.execute('CREATE TABLE IF NOT EXISTS Commission('
+                       'Date_of_Payment TEXT,'
+                       'Sallers_name TEXT UNIQUE,'
+                       'Commission FLOAT'
                        ')')
         
         cursor.close()

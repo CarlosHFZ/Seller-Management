@@ -106,10 +106,9 @@ def generate_CPF(num: int = 1):
 
         return cpf_gerado
 
+
 # função usada para validar o cpf que o usuario digitar
 #  e formatar para enviar no banco de dados
-
-
 def validate_cpf(cpf: str) -> str | None:
     cpf = ''.join(filter(str.isdigit, cpf))
     if len(cpf) != 11:
