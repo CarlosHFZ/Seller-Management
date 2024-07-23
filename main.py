@@ -1,52 +1,63 @@
+import ClassSeller
 from ClassSeller import SellerManagement
 import os
 import random
 import string
 from datetime import datetime, timedelta
-import sqlite3
 
-## As funções abaixo são apenas para automação de testes ##
 
-def generate_name():
+# As funções abaixo são apenas para automação de testes
+
+
+def generate_name() -> str:
     first_names = ['John', 'Jane', 'Michael', 'Sarah', 'William', 'Jessica', 'David', 'Emily', 'Robert', 'Linda']
     last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez']
     first_name = random.choice(first_names)
     last_name = random.choice(last_names)
     return f"{first_name} {last_name}"
 
-def generate_UF():
+
+def generate_UF() -> str:
     first_letter = ['S', 'S', 'G', 'M', 'B',]
     second_letter = ['C', 'P', 'O', 'G', 'A',]
     one = random.choice(first_letter)
     two = random.choice(second_letter)
     return f"{one}{two}"
 
-def generate_data(start_date='1925-01-01', end_date='2020-12-31'):
+
+def generate_data(
+        start_date: str = '1925-01-01',
+        end_date: str = '2020-12-31') -> str:
+
     formato_data = '%Y-%m-%d'
     data_inicio = datetime.strptime(start_date, formato_data)
     data_fim = datetime.strptime(end_date, formato_data)
-    
+
     # Gera um número aleatório de dias entre as duas datas
     delta_tempo = data_fim - data_inicio
     dias_aleatorios = random.randint(0, delta_tempo.days)
-    
+
     # Calcula a data aleatória adicionando os dias aleatórios à data de início
     data_aleatoria = data_inicio + timedelta(days=dias_aleatorios)
-    
+
     # Retorna a data no formato desejado
     return data_aleatoria.strftime('%Y/%m/%d')
 
-def generate_username(length=8):
+
+def generate_username(length: int = 8) -> str:
     characters = string.ascii_lowercase + string.digits
     return ''.join(random.choice(characters) for _ in range(length))
 
-def generate_email():
+
+def generate_email() -> str:
     common_domains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com']
     username = generate_username()
     domain = random.choice(common_domains)
     return f"{username}@{domain}"
 
-def generate_CPF(num=1):
+
+def generate_CPF(num: int = 1):
+
     for i in range(0, num):
         import random
 
@@ -89,10 +100,13 @@ def generate_CPF(num=1):
         cpf_gerado = ''
         for i in cpf_str:
             cpf_gerado += i
+        print(cpf_gerado)
         return cpf_gerado
 
+print(generate_CPF(1))
 
-## função usada para validar o cpf que o usuario digitar e formatar para enviar no banco de dados ##
+## função usada para validar o cpf que o usuario digitar
+##  e formatar para enviar no banco de dados
 def validate_cpf(cpf: str) -> str:
 
     cpf = ''.join(filter(str.isdigit, cpf))
@@ -123,6 +137,7 @@ while True:
             "9 - Limpar uma tabela do Banco de dados\n"
             "10 - Calcular comissão da equipe\n"
             "11 - Mostrar quadro de vendas geral\n"
+            "12 - Help (Em desenvolvimento) \n"
             "0 - Sair...\n"
             "Digite: "
             )
@@ -414,11 +429,32 @@ while True:
             else:
                 print(message)
 
-        case "0":
+        case "12":
             os.system("cls")
-            print("Saindo...")
+            print(
+                "1 - Help(main.py)\n"
+                "2 - Help(ClassSeller.py)\n"
+                "3 - Sair\n"
+                )
+            user = input("Digite: ")
+            match user:
+                case "1":                   
+                    os.system("cls")
+                    help()
+                case "2":
+                    os.system("cls")
+                    help(ClassSeller)
+                case "3":
+                    os.system("cls")
+                    continue
+                case _:
+                    os.system("cls")
+                    print("Mensagem: Opção invalida")
             break
 
+        case "0":
+            os.system("cls")
+            break
         case _:
             os.system("cls")
             print("Mensagem: Opção invalida")    

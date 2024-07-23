@@ -210,10 +210,12 @@ class SellerManagement():
         connection.close()
 
 
-##------- funcoes para deletar dados de um vendedor e limpar um banco de dados -------##
+    def clean_Table(self, table) -> str:
+        """Função para limpar uma tabela
 
-## Limpa os dados da tabela escolhida(Sellers, Sales ou Commission) entrada de dado pelo main ##
-    def clean_Table(self, table):
+            Limpa os dados da tabela escolhida(Sellers, Sales ou Commission)
+
+        """
         connection = sqlite3.connect("DataBase.db")
         cursor = connection.cursor()
         cursor.execute(f"DELETE FROM {table}")
