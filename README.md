@@ -25,7 +25,7 @@ Este programa foi desenvolvido para gerenciar dados de vendedores e vendas. Eis 
 ## Testes Automatizados:
 - Inclui testes para garantir a integridade dos dados.
 
-A exibição ocorre no terminal Python e utilizando DB Browser (SQLite) para acompanhar as movimentações de dados. Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a biblioteca Pandas.
+A exibição ocorre no terminal Python e utilizei o DB Browser (SQLite) para acompanhar as movimentações de dados. Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a biblioteca Pandas.
 
 
 
