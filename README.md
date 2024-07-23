@@ -1,6 +1,6 @@
 # Seller Management
 
-Este programa foi desenvolvido para gerenciar dados de vendedores e vendas. Eis o que ele oferece:
+Este programa foi desenvolvido para para gerenciar dados de vendedores e vendas. Eis o que ele oferece:
 
 ## Banco de Dados:
 - Criação de um banco de dados.
@@ -26,7 +26,3 @@ Este programa foi desenvolvido para gerenciar dados de vendedores e vendas. Eis 
 - Inclui testes para garantir a integridade dos dados.
 
 A exibição ocorre no terminal Python e utilizei o DB Browser (SQLite) para acompanhar as movimentações de dados. Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a biblioteca Pandas.
-
-
-
-
