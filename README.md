@@ -45,7 +45,4 @@ Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a bibliotec
 
 4. Apresentar o volume de vendas (R$) e média por profissional para cada canal e por cada estado.
 
-5. [BÔNUS] Utilize um banco de dados para armazenar os dados (ex: postgresql ou sqlite).
-
-6. [BÔNUS] Escreva testes para as classes e funções criadas.
 
