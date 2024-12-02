@@ -1,6 +1,6 @@
 # Seller Management
 
-Este programa foi desenvolvido para para gerenciar dados de vendedores e vendas. Eis o que ele oferece:
+Este programa foi desenvolvido para para gerenciar dados de planilhas de vendedores e vendas:
 
 ## Banco de Dados:
 - Criação de um banco de dados.
