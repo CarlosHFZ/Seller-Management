@@ -418,17 +418,17 @@ while True:
                         manage.clean_Table("Sellers")
                         os.system("cls")
                         print("Mensagem: Todos os dados da tabela vendedores"
-                              "foram apagados com sucesso!")
+                              " foram apagados com sucesso!")
                     case "2":
                         manage.clean_Table("Sales")
                         os.system("cls")
                         print("Mensagem: Todos os dados da tabela foram vendas"
-                              "apagados com sucesso!")
+                              " apagados com sucesso!")
                     case "3":
                         manage.clean_Table("Commission")
                         os.system("cls")
                         print("Mensagem: Todos os dados da tabela commissôes"
-                              "foram apagados com sucesso!")
+                              " foram apagados com sucesso!")
                     case "4":
                         os.system("cls")
                         continue

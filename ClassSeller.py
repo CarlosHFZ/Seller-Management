@@ -317,11 +317,11 @@ class SellerManagement():
                     os.system("cls")
                     return "Mensagem: O banco de dados não foi criado!",
 
-                except Exception:
+                except Exception as e:
                     cursor.close
                     connection.close()
                     os.system("cls")
-                    return "Mensagem: Erro desconhecido! --->", Exception
+                    return "Mensagem: Erro desconhecido! --->", e
 
 # Fiz essa função apenas para buscar uma informação especifca no banco de dados
     def search(self, data: str, table: str, where: str):

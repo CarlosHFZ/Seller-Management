@@ -25,4 +25,14 @@ Este programa foi desenvolvido para para gerenciar dados de vendedores e vendas.
 ## Testes Automatizados:
 - Inclui testes para garantir a integridade dos dados.
 
-A exibição ocorre no terminal Python e utilizei o DB Browser (SQLite) para acompanhar as movimentações de dados. Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a biblioteca Pandas.
+A exibição ocorre no terminal do VScode. Meu programa é desenvolvido em Python, faz uso do SQLite3 e utiliza a biblioteca Pandas.
+
+## Para rodar o script:
+
+- Crie o ambiente virtual venv
+- ative o ambiente virtual
+- instale o requirements.txt
+- rode o main.py
+
+Voce pode acompanhar a manipulação dos dados com um SGBD ou via terminal. As informações base
+são retiradas das planilhas Vendas.xlsx e Vendedores.xlsx
